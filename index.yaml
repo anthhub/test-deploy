@@ -1,0 +1,13 @@
+apiVersion: v1
+entries:
+  kubeblog:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: "2021-05-28T14:00:24.398150153Z"
+    description: A Helm chart for Kubernetes
+    digest: 90d59a755eb391c6b173358b6c4b956248cf0da8379b81481f4a4ec048a8a0cb
+    name: kubeblog
+    urls:
+    - kubeblog-0.1.2.tgz
+    version: 0.1.2
+generated: "2021-05-28T14:00:24.397333807Z"
