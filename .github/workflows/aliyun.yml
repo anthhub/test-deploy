@@ -14,12 +14,18 @@ jobs:
       - name: Checkout Dockerfile
         uses: actions/checkout@v2
 
-      - name: Build and Push Docker Iamge
+      - name: Build and Push Docker Image
         uses: docker/build-push-action@v1
         with: 
           registry: ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}
           username: ${{ secrets.ALI_DOCKER_HUB_USN }}
           password: ${{ secrets.ALI_DOCKER_HUB_PWD }}
           repository: anthhub/go-demo
-          tag_with_sha: true
+          tag_with_ref: true
+
+      - name: Deploy Helm
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./helm/repo
 
