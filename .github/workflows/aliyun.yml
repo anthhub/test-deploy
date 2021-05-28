@@ -37,3 +37,11 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./helm
 
+      - name: Helm Setup
+        timeout-minutes: 10
+        uses: JimCronqvist/action-ssh@master
+        with:
+          hosts: "118.190.37.169"
+          privateKey: ${{ secrets.PRIVATE_KEY }}
+          command: helm repo add test-deploy  https://anthhub.github.io/test-deploy && helm install test-deploy test-deploy/test-deploy && helm ls
+
