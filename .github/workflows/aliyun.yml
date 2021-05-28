@@ -21,11 +21,19 @@ jobs:
           username: ${{ secrets.ALI_DOCKER_HUB_USN }}
           password: ${{ secrets.ALI_DOCKER_HUB_PWD }}
           repository: anthhub/go-demo
-          tag_with_ref: true
+          tag_with_sha: true
+
+      - name: Install Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.4.0
+
+      - name: Run Helm Package
+        run: cd ./helm && helm package ./config && helm repo index . && ls
 
       - name: Deploy Helm
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./helm/repo
+          publish_dir: ./helm
 
