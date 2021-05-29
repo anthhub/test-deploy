@@ -6,6 +6,15 @@ on:
   pull_request:
     branches: [ main ]
 
+
+env:
+  REGION_ID: cn-hangzhou
+  REGISTRY: registry.cn-hangzhou.aliyuncs.com
+  NAMESPACE: namespace
+  IMAGE: repo
+  TAG: ${{ date +%Y%m%d-%H%M%S }}
+
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,6 +23,17 @@ jobs:
       - name: Checkout Dockerfile
         uses: actions/checkout@v2
 
+      # - name: Set up Docker Buildx
+      #   uses: docker/setup-buildx-action@v1
+
+      # - name: Cache Docker layers
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: /tmp/.buildx-cache
+      #     key: ${{ runner.os }}-buildx-${{ github.sha }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-buildx-
+
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v1
         with: 
@@ -21,7 +41,9 @@ jobs:
           username: ${{ secrets.ALI_DOCKER_HUB_USN }}
           password: ${{ secrets.ALI_DOCKER_HUB_PWD }}
           repository: anthhub/go-demo
-          tag_with_sha: true
+          tags: latest
+          # cache-from: type=local,src=/tmp/.buildx-cache
+          # cache-to: type=local,dest=/tmp/.buildx-cache
 
       - name: Install Helm
         uses: azure/setup-helm@v1
@@ -29,7 +51,7 @@ jobs:
           version: v3.4.0
 
       - name: Run Helm Package
-        run: cd ./helm && helm package ./config && helm repo index . && ls
+        run: cd ./helm && helm package ./config --version=${{ date +%Y%m%d-%H%M%S }}&& helm repo index . && ls > index.html
 
       - name: Deploy Helm
         uses: peaceiris/actions-gh-pages@v3
@@ -43,5 +65,13 @@ jobs:
         with:
           hosts: "118.190.37.169"
           privateKey: ${{ secrets.PRIVATE_KEY }}
-          command: helm repo add test-deploy  https://anthhub.github.io/test-deploy && helm install test-deploy test-deploy/test-deploy && helm ls
+          command: |
+            if helm status test-deploy 
+            then
+              helm repo update && helm upgrade test-deploy test-deploy/kubeblog
+            else
+              helm repo add test-deploy https://anthhub.github.io/test-deploy && helm install test-deploy test-deploy/kubeblog
+            fi
+            helm ls
 
+# if helm status  my-helm-charts ; then echo "true"; else helm repo add test-deploy  https://anthhub.github.io/test-deploy && helm install test-deploy test-deploy/test-deploy &&  fi
