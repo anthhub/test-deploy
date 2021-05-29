@@ -6,7 +6,7 @@ spec:
   ports:
     - protocol: TCP
       name: web
-      port: 80
+      port: 8000
   selector:
     app: go-server
 ---
