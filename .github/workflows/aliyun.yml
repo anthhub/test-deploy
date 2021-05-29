@@ -12,6 +12,7 @@ env:
   REGISTRY: registry.cn-hangzhou.aliyuncs.com
   NAMESPACE: namespace
   IMAGE: repo
+  TAG: 0.0.${{ github.run_number }}
 
 
 jobs:
@@ -50,7 +51,7 @@ jobs:
           version: v3.4.0
 
       - name: Run Helm Package
-        run: cd ./helm && helm package ./config --version=0.0.${{ github.run_number	}} && helm repo index . && ls > index.html
+        run: cd ./helm && helm package ./config --version=0.0.${{ github.run_number	}} && helm repo index . && ls > index.html && echo ${{ env.TAG }} > latest
 
       - name: Deploy Helm
         uses: peaceiris/actions-gh-pages@v3
@@ -67,12 +68,19 @@ jobs:
           command: |
             helm repo add test-deploy https://anthhub.github.io/test-deploy
             helm repo update
+            while $(curl https://anthhub.github.io/test-deploy/latest) != echo ${{ env.TAG }} 
+            do
+                echo "sleeping"
+                sleep 1
+            done
             helm search repo test-deploy
             if helm status test-deploy 
             then
-              helm upgrade test-deploy test-deploy/go-server-chart
+              helm upgrade test-deploy test-deploy/go-server-chart --version=0.0.${{ github.run_number	}}
             else
-              helm install test-deploy test-deploy/go-server-chart
+              helm install test-deploy test-deploy/go-server-chart --version=0.0.${{ github.run_number	}}
             fi
             helm ls
+
+
 
