@@ -3,11 +3,11 @@ entries:
   go-server-chart:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2021-05-29T17:35:53.285476736Z"
+    created: "2021-05-29T17:39:18.70910561Z"
     description: A Helm chart for Kubernetes
-    digest: b123aa98d9508361dadabeab3d89ebb12b7d0e86a3732ed7083300986af013f2
+    digest: ee9e93f6f5bb5a3a63ba44047610a2c5a57b10d4afd66e1e5d3b9a149089bbb1
     name: go-server-chart
     urls:
-    - go-server-chart-20210529173553.tgz
-    version: "20210529173553"
-generated: "2021-05-29T17:35:53.285121633Z"
+    - go-server-chart-0.0.43.tgz
+    version: 0.0.43
+generated: "2021-05-29T17:39:18.708572079Z"
