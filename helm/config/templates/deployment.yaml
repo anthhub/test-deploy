@@ -6,7 +6,7 @@ spec:
   ports:
     - protocol: TCP
       name: web
-      port: 80
+      port: 8000
   selector:
     app: go-server
 ---
@@ -26,13 +26,15 @@ spec:
       labels:
         app: go-server
     spec:
+      imagePullSecrets:
+        - name: liuma-registry
       containers:
         - name: go-server
-          image: containous/whoami
+          image: registry.cn-qingdao.aliyuncs.com/anthhub/go-demo:latest
           resources:
             limits:
               memory: "32Mi"
               cpu: "0.2"
           ports:
             - name: web
-              containerPort: 80
+              containerPort: 8000

@@ -6,11 +6,11 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`go.liuma.top`) && PathPrefix(`/`)
+    - match: Host(`go.liuma.top`)
       kind: Rule
       services:
         - name: go-server
-          port: 80
+          port: 8000
 
 # 自签名
 # openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/CN=who.liuma.top"
@@ -23,10 +23,10 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`go.liuma.top`) && PathPrefix(`/`)
+    - match: Host(`go.liuma.top`)
       kind: Rule
       services:
         - name: go-server
-          port: 80
+          port: 8000
   tls:
     secretName: who-tls
