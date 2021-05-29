@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`go.liuma.top`) && PathPrefix(`/`)
+    - match: Host(`go.liuma.top`) && PathPrefix(`/go`)
       kind: Rule
       services:
         - name: go-server
@@ -23,7 +23,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`go.liuma.top`) && PathPrefix(`/`)
+    - match: Host(`go.liuma.top`) && PathPrefix(`/go`)
       kind: Rule
       services:
         - name: go-server
