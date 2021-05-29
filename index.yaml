@@ -3,11 +3,11 @@ entries:
   kubeblog:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2021-05-28T16:05:55.213007808Z"
+    created: "2021-05-29T04:06:02.438068539Z"
     description: A Helm chart for Kubernetes
-    digest: efca7cf3957469abb5f9f635b3e82190eeaaa73cd8ed6afbe09a985c0995163f
+    digest: 44eb7624d343c1aae57e0796fac338a3830e0e55805f85222a89768097a0b232
     name: kubeblog
     urls:
-    - kubeblog-0.1.2.tgz
-    version: 0.1.2
-generated: "2021-05-28T16:05:55.211337501Z"
+    - kubeblog-20210529-120129.tgz
+    version: 20210529-120129
+generated: "2021-05-29T04:06:02.437451119Z"
