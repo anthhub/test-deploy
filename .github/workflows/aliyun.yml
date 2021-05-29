@@ -65,12 +65,14 @@ jobs:
           hosts: "118.190.37.169"
           privateKey: ${{ secrets.PRIVATE_KEY }}
           command: |
+            helm repo add test-deploy https://anthhub.github.io/test-deploy
+            helm repo update
+            helm search repo test-deploy
             if helm status test-deploy 
             then
-              helm repo update && helm upgrade test-deploy test-deploy/kubeblog
+              helm upgrade test-deploy test-deploy/go-server-chart
             else
-              helm repo add test-deploy https://anthhub.github.io/test-deploy && helm install test-deploy test-deploy/kubeblog
+              helm install test-deploy test-deploy/go-server-chart
             fi
             helm ls
 
-# if helm status  my-helm-charts ; then echo "true"; else helm repo add test-deploy  https://anthhub.github.io/test-deploy && helm install test-deploy test-deploy/test-deploy &&  fi
