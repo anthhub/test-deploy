@@ -1,13 +1,13 @@
 apiVersion: v1
 entries:
-  kubeblog:
+  go-server-chart:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2021-05-29T09:35:01.650357971Z"
+    created: "2021-05-29T10:56:32.937112945Z"
     description: A Helm chart for Kubernetes
-    digest: c96e69c282e62ed0625f1e0abc8640b325cb24fd7e55bc699934a80e0edd78ef
-    name: kubeblog
+    digest: 24c8c5eeac29449a40c33cc8d6fc920b3f304692ab625a5e3dbd0ed10d592808
+    name: go-server-chart
     urls:
-    - kubeblog-0.0.22.tgz
-    version: 0.0.22
-generated: "2021-05-29T09:35:01.649826874Z"
+    - go-server-chart-0.0.23.tgz
+    version: 0.0.23
+generated: "2021-05-29T10:56:32.936669341Z"
