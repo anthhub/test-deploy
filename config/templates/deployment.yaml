@@ -37,4 +37,4 @@ spec:
               cpu: "0.2"
           ports:
             - name: web
-              containerPort: 80
+              containerPort: 8000
