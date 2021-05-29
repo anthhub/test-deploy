@@ -28,7 +28,9 @@ spec:
     spec:
       containers:
         - name: go-server
-          image: containous/whoami
+          image: anthhub/go-demo:latest
+          imagePullSecrets:
+            - name: liuma-registry
           resources:
             limits:
               memory: "32Mi"
