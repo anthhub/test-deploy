@@ -26,11 +26,11 @@ spec:
       labels:
         app: go-server
     spec:
+      imagePullSecrets:
+        - name: liuma-registry
       containers:
         - name: go-server
           image: anthhub/go-demo:latest
-          imagePullSecrets:
-            - name: liuma-registry
           resources:
             limits:
               memory: "32Mi"
