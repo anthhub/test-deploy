@@ -30,7 +30,7 @@ spec:
         - name: liuma-registry
       containers:
         - name: go-server
-          image: registry.cn-qingdao.aliyuncs.com/anthhub/go-demo:latest
+          image: registry.cn-qingdao.aliyuncs.com/anthhub/go-demo:{{ .Values.image.tag }}
           resources:
             limits:
               memory: "32Mi"
