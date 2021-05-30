@@ -8,7 +8,7 @@ import (
 
 func hostnameHandler(w http.ResponseWriter, r *http.Request) {
 	myhostname, _ := os.Hostname()
-	fmt.Fprintln(w, "Hostname:", myhostname)
+	fmt.Fprintln(w, "go-server--Hostname:", myhostname)
 }
 
 func main() {

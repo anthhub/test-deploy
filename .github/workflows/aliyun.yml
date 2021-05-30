@@ -40,7 +40,7 @@ jobs:
           username: ${{ secrets.ALI_DOCKER_HUB_USN }}
           password: ${{ secrets.ALI_DOCKER_HUB_PWD }}
           repository: anthhub/go-demo
-          tags: latest
+          tags: ${{ env.TAG }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
 
@@ -79,9 +79,9 @@ jobs:
             helm search repo test-deploy
             if helm status test-deploy 
             then
-              helm upgrade test-deploy test-deploy/go-server-chart --version=${{ env.TAG }}
+              helm upgrade test-deploy test-deploy/go-server-chart --version=${{ env.TAG }} --set image.tag=${{ env.TAG }}
             else
-              helm install test-deploy test-deploy/go-server-chart --version=${{ env.TAG }}
+              helm install test-deploy test-deploy/go-server-chart --version=${{ env.TAG }} --set image.tag=${{ env.TAG }}
             fi
 
             helm ls
